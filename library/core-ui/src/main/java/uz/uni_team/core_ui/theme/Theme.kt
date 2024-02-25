@@ -1,4 +1,4 @@
-package uz.uni_team.uni_shop.ui.theme
+package uz.uni_team.core_ui.theme
 
 import android.app.Activity
 import android.os.Build

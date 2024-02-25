@@ -1,4 +1,4 @@
-package uz.uni_team.uni_shop.ui.theme
+package uz.uni_team.core_ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

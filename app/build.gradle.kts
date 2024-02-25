@@ -1,6 +1,15 @@
 plugins {
+    id("uni_shop.android.application")
+    id("uni_shop.android.application.compose")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.com.google.dev.ksp)
+}
+
+ksp {
+    arg("compose-destinations.mode", "destinations")
+    arg("compose-destinations.moduleName", "app")
+    arg("compose-destinations.useComposableVisibility", "true")
 }
 
 android {
@@ -19,36 +28,70 @@ android {
             useSupportLibrary = true
         }
     }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-            )
-        }
-    }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    buildTypes {
+        debug {
+            isMinifyEnabled = false
+            isShrinkResources = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                file("proguard-rules.pro")
+            )
+            buildConfigField("String", "BASE_URL", "\"url\"")
+
+            buildConfigField("long", "BUILD_DATE", "${System.currentTimeMillis()}L")
+        }
+        release {
+            isMinifyEnabled = false
+            isShrinkResources = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            )
+
+            buildConfigField("String", "BASE_URL", "\"url\"")
+
+            buildConfigField("long", "BUILD_DATE", "${System.currentTimeMillis()}L")
+        }
+    }
+
+    applicationVariants.all {
+        kotlin.sourceSets {
+            getByName(name) {
+                project.logger.debug("Falovr name -> $flavorName")
+                project.logger.debug("Name -> $name")
+                kotlin.srcDir("build/generated/ksp/$flavorName$name/kotlin")
+            }
+        }
+    }
+
 }
 
 dependencies {
+
+    //feature
+    implementation(project(":features:registration"))
+
+    implementation(project(":library:core-ui"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.android.lifecyle.runtime.ktx)
@@ -60,4 +103,9 @@ dependencies {
     implementation(libs.androidx.compose.ui.preview)
     implementation(libs.androidx.compose.material3)
 
+    //navigation
+    ksp(libs.raamcosta.compose.destinations.ksp)
+    implementation(libs.raamcosta.compose.destinations.core)
+    implementation(libs.raamcosta.compose.destinations.animations)
+    debugImplementation(libs.androidx.ui.tooling)
 }

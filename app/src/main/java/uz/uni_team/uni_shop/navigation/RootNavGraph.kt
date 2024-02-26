@@ -8,14 +8,17 @@ import uz.uni_team.registration.navigation.registrationNavGraph
 import uz.uni_team.uni_shop.ui.destinations.OnboardScreenDestination
 import uz.uni_team.uni_shop.ui.destinations.SplashScreenDestination
 
-object RootNavGraph : NavGraphSpec {
-    override val destinationsByRoute = emptyMap<String, DestinationSpec<*>>()
-    override val route: String = "root"
-    override val startRoute: Route = splashGraph
-    override val nestedNavGraphs: List<NavGraphSpec> = listOf(
-        splashGraph,
-        registrationNavGraph
-    )
+object RootNavGraph {
+
+    val root = object : NavGraphSpec {
+        override val route: String = "root"
+        override val startRoute: Route = splashGraph
+        override val destinationsByRoute = emptyMap<String, DestinationSpec<*>>()
+        override val nestedNavGraphs: List<NavGraphSpec> = listOf(
+            splashGraph,
+            registrationNavGraph
+        )
+    }
 }
 
 val splashGraph = object : NavGraphSpec {

@@ -22,10 +22,14 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.defaults.NestedNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
+import com.ramcosta.composedestinations.dynamic.within
+import com.ramcosta.composedestinations.manualcomposablecalls.composable
 import uz.uni_team.core_ui.theme.UniShopTheme
 import uz.uni_team.registration.navigation.registrationNavGraph
 import uz.uni_team.uni_shop.navigation.RootNavGraph
 import uz.uni_team.uni_shop.navigation.splashGraph
+import uz.uni_team.uni_shop.ui.SplashScreen
+import uz.uni_team.uni_shop.ui.destinations.SplashScreenDestination
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterialNavigationApi::class, ExperimentalAnimationApi::class)
@@ -37,9 +41,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val navController = rememberNavController()
                     val bottomSheetNavigator = rememberBottomSheetNavigator()
-                    navController.navigatorProvider += bottomSheetNavigator
+                    val navController = rememberNavController().apply {
+                        navigatorProvider.addNavigator(bottomSheetNavigator)
+                    }
 
                     ModalBottomSheetLayout(
                         bottomSheetNavigator = bottomSheetNavigator,
@@ -85,8 +90,12 @@ class MainActivity : ComponentActivity() {
                         DestinationsNavHost(
                             navController = navController,
                             engine = animatedNavHostEngine,
-                            navGraph = RootNavGraph
-                        )
+                            navGraph = RootNavGraph.root
+                        ){
+                            composable(SplashScreenDestination){
+                                SplashScreen(navController = navController)
+                            }
+                        }
                     }
                 }
             }

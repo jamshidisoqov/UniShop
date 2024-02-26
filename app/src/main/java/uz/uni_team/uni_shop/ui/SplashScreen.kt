@@ -27,16 +27,17 @@ import uz.uni_team.core_ui.theme.UniShopTheme
 import uz.uni_team.registration.navigation.registrationNavGraph
 import uz.uni_team.registration.ui.destinations.RegistrationScreenDestination
 import uz.uni_team.uni_shop.R
+import uz.uni_team.uni_shop.navigation.RootNavGraph
 
 
-@Destination
+@Destination(start = true)
 @Composable
 fun SplashScreen(navController: NavController) {
 
     LaunchedEffect(key1 = Unit) {
         delay(3000)
         println("--------Splash end--------")
-        navController.navigate(RegistrationScreenDestination within registrationNavGraph)
+        navController.navigate(RegistrationScreenDestination() within registrationNavGraph)
     }
 
     SplashScreenContent()

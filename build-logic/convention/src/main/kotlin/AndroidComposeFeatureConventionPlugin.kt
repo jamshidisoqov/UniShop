@@ -15,6 +15,7 @@ class AndroidComposeFeatureConventionPlugin : Plugin<Project> {
             pluginManager.apply {
                 apply("uni_shop.android.library")
                 apply("uni_shop.android.library.compose")
+                apply("uni_shop.android.koin")
                 apply("com.google.devtools.ksp")
             }
 

@@ -108,4 +108,11 @@ dependencies {
     implementation(libs.raamcosta.compose.destinations.core)
     implementation(libs.raamcosta.compose.destinations.animations)
     debugImplementation(libs.androidx.ui.tooling)
+
+    //koin
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose.navigation)
+    implementation(libs.koin.androidx.compose)
+    implementation(platform(libs.koin.bom))
 }

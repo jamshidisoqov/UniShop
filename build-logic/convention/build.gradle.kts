@@ -39,5 +39,9 @@ gradlePlugin {
             id = "uni_shop.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
         }
+        register("koinLibrary"){
+            id = "uni_shop.android.koin"
+            implementationClass = "AndroidKoinConventionPlugin"
+        }
     }
 }

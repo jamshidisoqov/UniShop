@@ -88,6 +88,10 @@ android {
 
 dependencies {
 
+    //common
+    implementation(project(":data"))
+    implementation(project(":domain"))
+
     //feature
     implementation(project(":features:registration"))
 

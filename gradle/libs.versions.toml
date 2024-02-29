@@ -7,6 +7,7 @@ androidCore = "1.12.0"
 desugar_jdk_libs = "1.1.5'"
 lifecycle = "2.7.0"
 compose = "1.8.2"
+#noinspection GradleDependency
 composeBom = "2024.02.00"
 #noinspection GradleDependency
 agp = "8.2.0"
@@ -22,9 +23,10 @@ material = "1.11.0"
 raamcostaNavigation = "1.9.52"
 #noinspection GradleDependency
 ksp = "1.9.0-1.0.11"
-uiTooling = "1.6.1"
+uiTooling = "1.6.2"
 composeCompiler = "1.5.1"
-koin = "3.5.0"
+koin = "3.5.3"
+ktor = "2.3.8"
 
 
 [libraries]
@@ -64,16 +66,25 @@ android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs
 
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-core-coroutines = { module = "io.insert-koin:koin-core-coroutines", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
-koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-androidx-compose-navigation = { module = "io.insert-koin:koin-androidx-compose-navigation", version.ref = "koin" }
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
 
+#ktor
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-serialization-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
+ktor-client-json = { module = "io.ktor:ktor-client-json", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-content-negotation ={module = "io.ktor:ktor-client-content-negotiation",version.ref = "ktor"}
 
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 com-google-dev-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ktor-plugin = { id = "io.ktor.plugin", version.ref = "ktor" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

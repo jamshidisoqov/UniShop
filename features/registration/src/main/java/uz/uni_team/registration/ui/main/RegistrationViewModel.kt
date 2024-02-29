@@ -1,36 +1,33 @@
 package uz.uni_team.registration.ui.main
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import uz.uni_team.domain.auth.AuthUseCase
 
-class RegistrationViewModel : ViewModel() {
+class RegistrationViewModel(private val authUseCase: AuthUseCase) : ViewModel() {
 
     private val _state: MutableStateFlow<RegistrationUiState> =
         MutableStateFlow(RegistrationUiState())
     val state: StateFlow<RegistrationUiState> = _state.asStateFlow()
 
-    fun incrementCount() {
-        val count = _state.value.count + 1
-        _state.update {
-            it.copy(
-                count = count
-            )
-        }
-    }
 
-    fun decrementCount() {
-        val count = _state.value.count - 1
-        _state.update {
-            it.copy(
-                count = count
-            )
+    fun onRegisterClick(phone: String, password: String) {
+        viewModelScope.launch {
+            runCatching {
+                authUseCase.invoke(phone, password)
+            }.onSuccess {
+
+            }.onFailure { th ->
+                th.printStackTrace()
+            }
         }
     }
 
     data class RegistrationUiState(
-        val count: Int = 0
+        val isLoading: Boolean = false
     )
 }

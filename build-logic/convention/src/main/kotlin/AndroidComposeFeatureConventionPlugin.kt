@@ -31,6 +31,9 @@ class AndroidComposeFeatureConventionPlugin : Plugin<Project> {
 
             dependencies {
 
+
+                add("implementation", project(":domain"))
+
                 //Compose
                 add("implementation", libs.findLibrary("androidx.compose.ui").get())
                 add("implementation",libs.findLibrary("androidx.compose.ui.graphics").get())

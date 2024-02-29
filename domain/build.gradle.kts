@@ -1,7 +1,7 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    id("uni_shop.android.koin")
 }
 
 android {
@@ -34,6 +34,8 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.appcompat)

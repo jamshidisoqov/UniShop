@@ -17,12 +17,20 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
+            buildConfigField("String", "BASE_URL", "\"https://bot-promocoder.tt64295.tw1.ru/\"")
+
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"https://bot-promocoder.tt64295.tw1.ru/\"")
         }
     }
     compileOptions {
@@ -31,6 +39,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 

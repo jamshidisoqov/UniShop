@@ -1,4 +1,4 @@
-package uz.uni_team.data.network.service
+package uz.uni_team.data.network.service.auth
 
 import io.ktor.client.HttpClient
 import io.ktor.client.request.post

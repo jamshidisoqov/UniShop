@@ -26,8 +26,7 @@ import kotlinx.coroutines.delay
 import uz.uni_team.core_ui.theme.UniShopTheme
 import uz.uni_team.registration.navigation.registrationNavGraph
 import uz.uni_team.registration.ui.destinations.RegistrationScreenDestination
-import uz.uni_team.uni_shop.R
-import uz.uni_team.uni_shop.navigation.RootNavGraph
+import uz.uni_team.core_ui_resources.R
 
 
 @Destination(start = true)

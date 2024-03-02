@@ -94,8 +94,12 @@ dependencies {
 
     //feature
     implementation(project(":features:registration"))
+    implementation(project(":features:home"))
+    implementation(project(":features:warehouse"))
 
+    //core
     implementation(project(":library:core-ui"))
+    implementation(project(":library:core-ui-resources"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.android.lifecyle.runtime.ktx)

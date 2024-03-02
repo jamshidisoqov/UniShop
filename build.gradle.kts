@@ -9,6 +9,7 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.9.0" apply false
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.com.google.dev.ksp) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
 }
 
 

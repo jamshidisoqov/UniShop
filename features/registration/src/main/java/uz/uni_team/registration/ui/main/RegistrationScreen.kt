@@ -12,6 +12,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -22,17 +23,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.ramcosta.composedestinations.annotation.Destination
 import org.koin.androidx.compose.koinViewModel
 
 @Destination
 @Composable
-fun RegistrationScreen(navController: NavController) {
+fun RegistrationScreen(onNavigateToHome: () -> Unit) {
+
     val viewModel: RegistrationViewModel = koinViewModel()
+
     val uiState: RegistrationViewModel.RegistrationUiState by viewModel.state.collectAsState()
+
     RegistrationContent(
-        onRegisterClick = viewModel::onRegisterClick,
+        onRegisterClick = { phone, password ->
+            onNavigateToHome.invoke()
+        },
     )
 }
 
@@ -48,6 +53,7 @@ private fun RegistrationContent(
         modifier = Modifier.fillMaxSize(), topBar = {
             TopAppBar(
                 title = { Text(text = "Register", color = Color.White) },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Black)
             )
         }, containerColor = Color.Black
     ) {
@@ -64,6 +70,9 @@ private fun RegistrationContent(
                 value = phoneTextFieldValue,
                 onValueChange = {
                     phoneTextFieldValue = it
+                },
+                placeholder = {
+                    Text(text = "Phone")
                 },
             )
             TextField(

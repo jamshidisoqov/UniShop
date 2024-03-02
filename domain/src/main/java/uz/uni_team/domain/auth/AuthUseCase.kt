@@ -1,7 +1,7 @@
 package uz.uni_team.domain.auth
 
 import uz.uni_team.data.model.remote.auth.AuthRequest
-import uz.uni_team.data.repository.AuthRepository
+import uz.uni_team.data.repository.auth.AuthRepository
 
 class AuthUseCase(
     private val repository: AuthRepository

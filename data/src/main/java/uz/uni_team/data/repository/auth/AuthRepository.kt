@@ -1,4 +1,4 @@
-package uz.uni_team.data.repository
+package uz.uni_team.data.repository.auth
 
 import uz.uni_team.data.model.remote.auth.AuthRequest
 

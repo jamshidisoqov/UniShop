@@ -33,6 +33,9 @@ class AndroidComposeFeatureConventionPlugin : Plugin<Project> {
 
 
                 add("implementation", project(":domain"))
+                add("implementation", project(":library:core-ui-resources"))
+                add("implementation", project(":library:core-ui"))
+                add("implementation", project(":library:framework"))
 
                 //Compose
                 add("implementation", libs.findLibrary("androidx.compose.ui").get())

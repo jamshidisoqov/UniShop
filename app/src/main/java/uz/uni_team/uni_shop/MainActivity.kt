@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.plusAssign
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
 import com.google.accompanist.navigation.material.rememberBottomSheetNavigator
@@ -22,14 +21,14 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.defaults.NestedNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
-import com.ramcosta.composedestinations.dynamic.within
-import com.ramcosta.composedestinations.manualcomposablecalls.composable
 import uz.uni_team.core_ui.theme.UniShopTheme
+import uz.uni_team.home.navigation.homeNavGraph
 import uz.uni_team.registration.navigation.registrationNavGraph
 import uz.uni_team.uni_shop.navigation.RootNavGraph
+import uz.uni_team.uni_shop.navigation.callBuilders.homeCallBuilders
+import uz.uni_team.uni_shop.navigation.callBuilders.registrationCallBuilder
 import uz.uni_team.uni_shop.navigation.splashGraph
-import uz.uni_team.uni_shop.ui.SplashScreen
-import uz.uni_team.uni_shop.ui.destinations.SplashScreenDestination
+import uz.uni_team.warehouse.navigation.warehouseNavGraph
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterialNavigationApi::class, ExperimentalAnimationApi::class)
@@ -84,6 +83,8 @@ class MainActivity : ComponentActivity() {
                             defaultAnimationsForNestedNavGraph = mapOf(
                                 splashGraph to animation,
                                 registrationNavGraph to animation,
+                                homeNavGraph to animation,
+                                warehouseNavGraph to animation
                             )
                         )
 
@@ -91,10 +92,9 @@ class MainActivity : ComponentActivity() {
                             navController = navController,
                             engine = animatedNavHostEngine,
                             navGraph = RootNavGraph.root
-                        ){
-                            composable(SplashScreenDestination){
-                                SplashScreen(navController = navController)
-                            }
+                        ) {
+                            registrationCallBuilder()
+                            homeCallBuilders()
                         }
                     }
                 }
